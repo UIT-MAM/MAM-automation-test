@@ -1,41 +1,35 @@
-import { $ } from '@wdio/globals'
-import Page from './page.js';
+class LoginPage {
+  // ===== SELECTORS =====
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputUsername () {
-        return $('#username');
-    }
+  get loginNowLink() {
+    // content-desc = accessibility id
+    return $('~login_now');
+  }
 
-    get inputPassword () {
-        return $('#password');
-    }
+  get usernameInput() {
+    return $('~input_username'); // ví dụ
+  }
 
-    get btnSubmit () {
-        return $('button[type="submit"]');
-    }
+  get passwordInput() {
+    return $('~input_password'); // ví dụ
+  }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
-    }
+  get loginButton() {
+    return $('~btn_login');
+  }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    open () {
-        return super.open('login');
-    }
+  // ===== ACTIONS =====
+
+  async openLoginFromWelcome() {
+    await this.loginNowLink.waitForDisplayed({ timeout: 10000 });
+    await this.loginNowLink.click();
+  }
+
+  async login(username, password) {
+    await this.usernameInput.setValue(username);
+    await this.passwordInput.setValue(password);
+    await this.loginButton.click();
+  }
 }
 
-export default new LoginPage();
+module.exports = new LoginPage();
