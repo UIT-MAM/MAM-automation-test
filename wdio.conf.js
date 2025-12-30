@@ -34,7 +34,7 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-    './test/specs/login-navigation.spec.js'
+    './test/specs/User_Management/TC_UM_FILTER_01.spec.js'
     ],
     // Patterns to exclude.
     exclude: [

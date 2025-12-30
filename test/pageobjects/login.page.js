@@ -7,15 +7,15 @@ class LoginPage {
   }
 
   get usernameInput() {
-    return $('~input_username'); // ví dụ
+    return $('//android.widget.ScrollView/android.widget.EditText[1]');
   }
 
   get passwordInput() {
-    return $('~input_password'); // ví dụ
+    return $('//android.widget.ScrollView/android.widget.EditText[2]');
   }
 
   get loginButton() {
-    return $('~btn_login');
+    return $('//android.widget.ScrollView/android.view.View[1]/android.widget.Button');
   }
 
   // ===== ACTIONS =====
@@ -30,6 +30,20 @@ class LoginPage {
     await this.passwordInput.setValue(password);
     await this.loginButton.click();
   }
+  async loginAsAdmin() {
+    await this.login('admin', 'ZTEGC1E1FC92');
+  }
+
+  async isDisplayed() {
+  try {
+    await this.usernameInput.waitForDisplayed({ timeout: 10000 });
+    await this.loginButton.waitForDisplayed({ timeout: 10000 });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 }
 
 module.exports = new LoginPage();
